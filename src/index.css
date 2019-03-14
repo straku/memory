@@ -70,4 +70,6 @@ body {
 
 .card .face:last-child {
   transform: translate(-50%, -50%) rotateY(180deg);
+  /* fix for weird alignment of emoji */
+  padding-top: 10px;
 }
