@@ -45,7 +45,18 @@ body {
 .board {
   display: flex;
   flex-wrap: wrap;
+}
+
+.board.easy {
+  width: 320px;
+}
+
+.board.medium {
   width: 480px;
+}
+
+.board.hard {
+  width: 640px;
 }
 
 .board .card {
@@ -72,4 +83,33 @@ body {
   transform: translate(-50%, -50%) rotateY(180deg);
   /* fix for weird alignment of emoji */
   padding-top: 10px;
+}
+
+.level-picker {
+  color: var(--pallete-1);
+  text-align: center;
+}
+
+button {
+  text-transform: uppercase;
+  background-color: var(--pallete-1);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-weight: bolder;
+  color: var(--pallete-3);
+  font-size: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.score {
+  text-align: center;
+  color: var(--pallete-5);
+}
+
+.score strong {
+  color: var(--pallete-1);
+  font-size: 1.25em;
+  font-weight: bolder;
 }
