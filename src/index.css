@@ -26,22 +26,6 @@ body {
   align-items: center;
 }
 
-.card {
-  width: 60px;
-  height: 80px;
-  border-radius: 10px;
-  background-color: var(--pallete-2);
-  font-size: 40px;
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: rotateY(0deg);
-  transition: transform 500ms ease-out;
-  box-shadow: -2px 2px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
 .board {
   display: flex;
   flex-wrap: wrap;
@@ -67,20 +51,41 @@ body {
   transform: rotateY(179.99deg);
 }
 
+.card {
+  width: 60px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: var(--pallete-2);
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 500ms ease-out;
+  box-shadow: -2px 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
 .card .face {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   backface-visibility: hidden;
 }
 
+/* translate in z axis is needed because of the glitch in safari
+more context in below questions on stackoverflow 
+https://stackoverflow.com/questions/43075089/safari-css-transform-3d-rotation-glitch
+https://stackoverflow.com/questions/18146511/bug-in-css3-rotatey-transition-on-safari */
+
 .card .face:first-child {
   color: rgba(0, 0, 0, 0.6);
+  transform: translate3d(-50%, -50%, 1px);
 }
 
 .card .face:last-child {
-  transform: translate(-50%, -50%) rotateY(180deg);
+  transform: translate3d(-50%, -50%, -1px) rotateY(180deg);
   /* fix for weird alignment of emoji */
   padding-top: 10px;
 }
