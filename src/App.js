@@ -138,8 +138,6 @@ class App extends Component {
     const newCardsState = cardsState.slice();
     const faceUpCardId = newCardsState.findIndex(card => card === 'face-up');
 
-    this.moves++;
-
     // when first card from pair is flipped
     if (faceUpCardId === -1) {
       newCardsState[card.id] = 'face-up';
