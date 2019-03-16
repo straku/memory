@@ -139,7 +139,7 @@ class App extends Component {
     const faceUpCardId = newCardsState.findIndex(card => card === 'face-up');
 
     // when first card from pair is flipped
-    if (faceUpCardId === -1) {
+    if (faceUpCardId === -1 || faceUpCardId === card.id) {
       newCardsState[card.id] = 'face-up';
       this.setState(state => ({
         cardsState: newCardsState,
