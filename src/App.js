@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import shuffle from 'lodash/shuffle';
+import shuffle from 'lodash.shuffle';
 
 // prettier-ignore
 const faces = [
@@ -57,9 +57,8 @@ function Card(props) {
   );
 }
 
-function Score(props) {
-  const { numberOfCards, numberOfMoves, onRetry } = props;
-  const score = 1000 / (numberOfMoves / numberOfCards);
+function EndScreen(props) {
+  const { score, onRetry } = props;
   return (
     <div className="score">
       <h1>🎉🎉🎉</h1>
@@ -108,6 +107,11 @@ class App extends Component {
       this
     );
     this.handleRetry = this.handleRetry.bind(this);
+  }
+
+  getScore() {
+    const { moves, cards } = this.state;
+    return 1000 / (moves / cards.length);
   }
 
   handleDifficultyLevelSelect(level) {
@@ -192,11 +196,7 @@ class App extends Component {
           />
         )}
         {appState === 'finish' && (
-          <Score
-            numberOfCards={cards.length}
-            numberOfMoves={moves}
-            onRetry={this.handleRetry}
-          />
+          <EndScreen score={this.getScore()} onRetry={this.handleRetry} />
         )}
       </div>
     );
