@@ -15,14 +15,16 @@ const faces = [
 ];
 
 function LevelPicker(props) {
-  const { onSelect } = props;
+  const { difficultyLevels, onSelect } = props;
   return (
     <div className="level-picker">
       <h1>Memory game 🙈</h1>
       <h2>Pick difficulty level:</h2>
-      <button onClick={() => onSelect('easy')}>easy</button>
-      <button onClick={() => onSelect('medium')}>medium</button>
-      <button onClick={() => onSelect('hard')}>hard</button>
+      {difficultyLevels.map(level => (
+        <button key={level.name} onClick={() => onSelect(level.name)}>
+          {level.name}
+        </button>
+      ))}
     </div>
   );
 }
@@ -82,11 +84,11 @@ function getCards(length) {
 // possible card states: 'face-down' | 'face-up' | 'done'
 // possible app states: 'start' | 'playing' | 'finish'
 
-const difficultyLevels = {
-  easy: 16,
-  medium: 36,
-  hard: 64,
-};
+const difficultyLevels = [
+  { name: 'easy', size: 16 },
+  { name: 'medium', size: 36 },
+  { name: 'hard', size: 64 },
+];
 
 const initialState = {
   appState: 'start',
@@ -97,47 +99,39 @@ const initialState = {
 };
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = initialState;
-
-    this.handleBoardChange = this.handleBoardChange.bind(this);
-    this.handleDifficultyLevelSelect = this.handleDifficultyLevelSelect.bind(
-      this
-    );
-    this.handleRetry = this.handleRetry.bind(this);
-  }
+  state = initialState;
 
   getScore() {
     const { moves, cards } = this.state;
     return 1000 / (moves / cards.length);
   }
 
-  handleDifficultyLevelSelect(level) {
-    const numberOfCards = difficultyLevels[level];
+  handleDifficultyLevelSelect = selectedLevel => {
+    const numberOfCards = difficultyLevels.find(
+      level => level.name === selectedLevel
+    ).size;
     const cards = getCards(numberOfCards);
     this.setState({
       cards: cards,
       cardsState: Array(numberOfCards).fill('face-down'),
       appState: 'playing',
-      level: level,
+      level: selectedLevel,
     });
-  }
+  };
 
-  handleRetry() {
+  handleRetry = () => {
     this.setState(initialState);
-  }
+  };
 
-  handleAppStateChange() {
+  handleAppStateChange = () => {
     if (this.state.cardsState.filter(state => state !== 'done').length === 0) {
       this.setState({
         appState: 'finish',
       });
     }
-  }
+  };
 
-  handleBoardChange(card) {
+  handleBoardChange = card => {
     const { cards, cardsState } = this.state;
     const newCardsState = cardsState.slice();
     const faceUpCardId = newCardsState.findIndex(card => card === 'face-up');
@@ -178,14 +172,17 @@ class App extends Component {
       }, 500);
       return;
     }
-  }
+  };
 
   render() {
-    const { cards, cardsState, appState, level, moves } = this.state;
+    const { cards, cardsState, appState, level } = this.state;
     return (
       <div className="container">
         {appState === 'start' && (
-          <LevelPicker onSelect={this.handleDifficultyLevelSelect} />
+          <LevelPicker
+            difficultyLevels={difficultyLevels}
+            onSelect={this.handleDifficultyLevelSelect}
+          />
         )}
         {appState === 'playing' && (
           <Board
