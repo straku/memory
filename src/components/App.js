@@ -134,16 +134,11 @@ class App extends Component {
       newCardsState[card.id] = 'face-up-temp';
     }
 
-    this.setState(
-      state => ({
-        cardsState: newCardsState,
-        moves: state.moves + 1,
-        appState: getAppStateFromCardsState(newCardsState),
-      }),
-      () => {
-        console.log(this.state.moves);
-      }
-    );
+    this.setState(state => ({
+      cardsState: newCardsState,
+      moves: state.moves + 1,
+      appState: getAppStateFromCardsState(newCardsState),
+    }));
 
     clearTimeout(this.timeout);
     this.timeout = setTimeout(this.clearBoard, 500);
