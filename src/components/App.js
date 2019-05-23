@@ -88,7 +88,6 @@ class App extends Component {
       cardsState: Array(numberOfCards).fill('face-down'),
       appState: 'playing',
       level: selectedLevel,
-      moves: 0,
     });
   };
 
