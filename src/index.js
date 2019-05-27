@@ -16,19 +16,15 @@ const faces = [
 ];
 
 class Card extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      flipped: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state = {
+    flipped: false,
+  };
 
-  handleClick() {
+  handleClick = () => {
     this.setState({
       flipped: !this.state.flipped,
     });
-  }
+  };
 
   render() {
     return (
