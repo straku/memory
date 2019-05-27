@@ -34,7 +34,7 @@ const faces = [
 // - finish
 
 const difficultyLevels = [
-  { name: 'easy', size: 16 },
+  { name: 'easy', size: 4 },
   { name: 'medium', size: 36 },
   { name: 'hard', size: 64 },
 ];
@@ -75,7 +75,7 @@ class App extends Component {
 
   getScore() {
     const { moves, cards } = this.state;
-    return 1000 / (moves / cards.length);
+    return Math.floor(1000 / (moves / cards.length));
   }
 
   handleDifficultyLevelSelect = selectedLevel => {
