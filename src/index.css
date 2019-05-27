@@ -29,6 +29,7 @@ body {
 .board {
   display: flex;
   flex-wrap: wrap;
+  width: 320px;
 }
 
 .board.easy {

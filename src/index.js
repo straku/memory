@@ -3,6 +3,32 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 
-import App from './components/App';
+// prettier-ignore
+const faces = [
+    '🐶', '🐱', '🐭', '🐹',
+    '🐰', '🦊', '🐻', '🐼',
+    '🐨', '🐯', '🦁', '🐮',
+    '🐷', '🐸', '🐵', '🐔',
+    '🦑', '🦖', '🐧', '🦆',
+    '🦅', '🦉', '🦇', '🐺',
+    '🐗', '🐴', '🦄', '🐝',
+    '🐛', '🦋', '🐌', '🐟',
+  ];
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class Card extends React.Component {
+  render() {
+    return (
+      <div className={`card ${this.props.flipped ? 'flipped' : ''}`}>
+        <div className="face">♦️</div>
+        <div className="face">{this.props.face}</div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <div className="container">
+    <Card face="🦑" flipped={false} />
+  </div>,
+  document.getElementById('root')
+);
