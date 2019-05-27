@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import shuffle from 'lodash.shuffle';
 
+import { calculateNewCardsState } from '../game-logic';
+
 import Board from './Board';
 
 // prettier-ignore
@@ -18,6 +20,7 @@ const faces = [
 // possible card states:
 // - face-down
 // - face-up
+// - done
 
 function getCards(length) {
   const possibleFaces = shuffle(faces).slice(0, length / 2);
@@ -40,12 +43,15 @@ export default class App extends Component {
       cards: cards,
       cardsState: Array(props.size).fill('face-down'),
     };
+    this.timeout = null;
   }
 
   handleBoardChange = card => {
-    const newCardsState = [...this.state.cardsState];
+    const newCardsState = calculateNewCardsState(card, this.state);
 
-    newCardsState[card.id] = 'face-up';
+    if (newCardsState === null) {
+      return;
+    }
 
     this.setState({
       cardsState: newCardsState,
