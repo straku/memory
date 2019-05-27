@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import { saveScore } from '../api';
+import TopScores from './TopScores';
 import ScoreTable from './ScoreTable';
 
 export default class EndScreen extends Component {
@@ -51,6 +52,7 @@ export default class EndScreen extends Component {
             <ScoreTable scores={scores} />
           ) : (
             <Fragment>
+              <TopScores />
               <h3>Do you want to submit the score?</h3>
               <label>
                 Nickname
