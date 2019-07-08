@@ -34,7 +34,7 @@ const faces = [
 // - finish
 
 const difficultyLevels = [
-  { name: 'easy', size: 4 },
+  { name: 'easy', size: 16 },
   { name: 'medium', size: 36 },
   { name: 'hard', size: 64 },
 ];
