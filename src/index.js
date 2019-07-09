@@ -15,4 +15,4 @@ const faces = [
   '🐛', '🦋', '🐌', '🐟',
 ];
 
-ReactDOM.render(<div>Hello, world!</div>, document.getElementById('root'));
+ReactDOM.render(React.createElement('div', null, 'Hello, world!'), document.getElementById('root'));
