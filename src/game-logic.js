@@ -11,10 +11,7 @@ function normalizeCardsState(cardsState) {
 
 export function calculateNewCardsState(card, state) {
   const { cards, cardsState } = state;
-  // let's prepare new state
-  // new state will be created from existing state, with every "face-up-temp"
-  // card state replaced with "face-down" (we want to flip them after some
-  // amount of time elapsed or some interaction from the player)
+  
   const newCardsState = normalizeCardsState([...cardsState]);
 
   const faceUpCardId = newCardsState.findIndex(card => card === 'face-up');
